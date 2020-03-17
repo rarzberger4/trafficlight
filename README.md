@@ -15,8 +15,10 @@ Folgende Schritte sind zu durchzuführen
 * Setzen Sie Farben entsprechend dem Zustand
 
 ![Grün](/pics/greenLight.png)
+![Gelb](/pics/yellowLight.png)
+![Rot](/pics/redLight.png)
 
-
+Happy coding!
 
 
 
