@@ -1,9 +1,9 @@
 package trafficlight.ctrl;
 
 import trafficlight.gui.TrafficLightGui;
-import trafficlight.states.State;
+import trafficlight.states.*;
 
-public class TrafficLightCtrl {
+public class TrafficLightCtrl{
 
     private State greenState;
 
@@ -26,7 +26,67 @@ public class TrafficLightCtrl {
     }
 
     private void initStates() {
-        //TODO create the states and set current and previous state
+        //TOD create the states and set current and previous state
+        currentState = new greenstate(){
+
+            @Override
+            public State nextState() {
+                previousState = currentState;
+                currentState = greenState;
+                return currentState;
+            }
+
+            @Override
+            public State getState() {
+                return currentState;
+            }
+        };
+
+
+        greenState = new greenstate() {
+
+            @Override
+            public State nextState() {
+                previousState = currentState;
+                currentState = yellowState;
+                return currentState;
+            }
+
+            @Override
+            public State getState() {
+                return currentState;
+            }
+        };
+
+        redState = new redstate(){
+
+            @Override
+            public State nextState() {
+                previousState = currentState;
+                currentState = greenState;
+                return currentState;
+            }
+
+            @Override
+            public State getState() {
+                return currentState;
+            }
+        };
+
+        yellowState = new yellowstate(){
+
+            @Override
+            public State nextState() {
+                previousState = currentState;
+                currentState = redState;
+                return currentState;
+            }
+
+            @Override
+            public State getState() {
+                return currentState;
+            }
+        };
     }
 
     public State getGreenState() {
@@ -62,6 +122,7 @@ public class TrafficLightCtrl {
     }
 
     public void nextState() {
-        //TODO handle GUi request and update GUI
+        currentState.nextState();
+        gui.setLight(currentState.tlc());
     }
 }
